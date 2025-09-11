@@ -1,4 +1,5 @@
 ﻿using ValueObject.SourceGenerator.Emitters;
+using ValueObject.SourceGenerator.Providers;
 
 namespace ValueObject.SourceGenerator;
 
@@ -8,22 +9,24 @@ public class ValueObjectIncrementalGenerator : IIncrementalGenerator
     public void Initialize(IncrementalGeneratorInitializationContext ctx)
     {
         // 1) find all VO records
-        var vos = VoDeclarationProvider.Setup(ctx)
-                 .Collect();
+        var vosProvider = VoDeclarationProvider.Setup(ctx).Collect();
 
-        // 2) generate once, passing in the full list
+        // 2) combine with compilation for entity properties
         ctx.RegisterSourceOutput(
-            ctx.CompilationProvider.Combine(vos),
+            ctx.CompilationProvider.Combine(vosProvider),
             (spc, source) =>
             {
                 var (compilation, voArray) = source;
                 if (voArray.Length == 0) return;
 
-                // 3) emit each piece
+                // Emit standard VO pieces first
                 OperatorsEmitter.Emit(spc, voArray);
                 TvAsEmitter.Emit(spc, voArray);
                 ExtensionBlockEmitter.Emit(spc, voArray);
                 ConversionEmitter.Emit(spc, voArray);
+
+                var entityProps = EntityValueObjectProvider.Collect(compilation, voArray);
+                EfCoreModelBuilderEmitter.Emit(spc, entityProps);
             });
-    }
+    }   
 }

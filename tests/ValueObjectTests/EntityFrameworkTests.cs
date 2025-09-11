@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ValueObject.Core;
-using ValueObjectTests.Generated.ValueConverters;
 
 namespace ValueObjectTests;
 
@@ -50,14 +49,6 @@ public class ProductDbContext : DbContext
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Product>(entity =>
-        {
-            entity.HasKey(e => e.Id);
-            entity.Property(e => e.Id).HasConversion(new ProductIdValueConverter());
-            entity.Property(e => e.Price)
-                  .HasConversion(new PriceValueConverter());
-            entity.Property(e => e.ImageUrl)
-                  .HasConversion(new ImageUrlNullableValueConverter());
-        });
+        modelBuilder.Entity<Product>().ConfigureValueObjectProperties();
     }
 }

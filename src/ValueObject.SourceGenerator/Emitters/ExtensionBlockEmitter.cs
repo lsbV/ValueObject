@@ -1,5 +1,7 @@
 ﻿
 
+using ValueObject.SourceGenerator.Models;
+
 namespace ValueObject.SourceGenerator.Emitters;
 
 internal static class ExtensionBlockEmitter

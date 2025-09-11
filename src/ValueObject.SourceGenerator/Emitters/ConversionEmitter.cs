@@ -1,4 +1,6 @@
-﻿namespace ValueObject.SourceGenerator.Emitters;
+﻿using ValueObject.SourceGenerator.Models;
+
+namespace ValueObject.SourceGenerator.Emitters;
 
 internal class ConversionEmitter
 {
@@ -14,9 +16,10 @@ internal class ConversionEmitter
             sb.AppendLine();
             sb.AppendLine("using Microsoft.EntityFrameworkCore.Storage.ValueConversion;");
             sb.AppendLine();
+            // Keep the same namespace as the source type
             if (vo.Namespace is not null)
             {
-                sb.AppendLine($"namespace {vo.Namespace}.Generated.ValueConverters;");
+                sb.AppendLine($"namespace {vo.Namespace};");
                 sb.AppendLine();
             }
             sb.AppendLine($"public class {vo.TypeName}ValueConverter : ValueConverter<{vo.TypeName}, {vo.TvDisplay}>");

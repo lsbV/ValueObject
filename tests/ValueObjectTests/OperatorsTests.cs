@@ -27,6 +27,18 @@ public class OperatorsTests
     }
 
     [Fact]
+    public void GreaterOperator_Should_Work()
+    {
+        var length1 = new Length(123.5);
+        var length2 = new Length(100);
+        Assert.True(length1 > length2);
+        Assert.True(length1 >= length2);
+        Assert.False(length1 < length2);
+        Assert.False(length1 <= length2);
+        Assert.True(length1 > 100);
+    }
+
+    [Fact]
     public void AsExtension_Should_Convert_Primiry_Type_To_AsWrapper()
     {
         string value = NAME;
@@ -40,3 +52,5 @@ public class OperatorsTests
 
 
 public partial record Name(string Value) : IValueObject<string>;
+
+public partial record Length(double Value) : IValueObject<double>;

@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using ValueObject.SourceGenerator.Models;
 
-namespace ValueObject.SourceGenerator;
+namespace ValueObject.SourceGenerator.Providers;
 
 internal static class VoDeclarationProvider
 {
