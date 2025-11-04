@@ -25,6 +25,7 @@ public class ValueObjectIncrementalGenerator : IIncrementalGenerator
                 ExtensionBlockEmitter.Emit(spc, voArray);
                 ConversionEmitter.Emit(spc, voArray);
                 MongoDbSerializerEmitter.Emit(spc, voArray);
+                MongoDbClassMapEmitter.Emit(spc, voArray);
 
                 var entityProps = EntityValueObjectProvider.Collect(compilation, voArray);
                 EfCoreModelBuilderEmitter.Emit(spc, entityProps);
