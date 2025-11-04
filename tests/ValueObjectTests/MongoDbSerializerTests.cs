@@ -27,14 +27,23 @@ public class MongoDbSerializerTests
         using var writer = new MongoDB.Bson.IO.BsonBinaryWriter(memoryStream);
         var context = MongoDB.Bson.Serialization.BsonSerializationContext.CreateRoot(writer);
 
+        // Root of a BSON document must be a document/array, not a scalar. Wrap in a document field.
+        writer.WriteStartDocument();
+        writer.WriteName("value");
         serializer.Serialize(context, new MongoDB.Bson.Serialization.BsonSerializationArgs(), userId);
+        writer.WriteEndDocument();
         writer.Flush();
         memoryStream.Position = 0;
 
         using var reader = new MongoDB.Bson.IO.BsonBinaryReader(memoryStream);
         var deserializeContext = MongoDB.Bson.Serialization.BsonDeserializationContext.CreateRoot(reader);
-        var deserializedUserId = serializer.Deserialize(deserializeContext, new MongoDB.Bson.Serialization.BsonDeserializationArgs());
 
+        reader.ReadStartDocument();
+        var name = reader.ReadName();
+        var deserializedUserId = serializer.Deserialize(deserializeContext, new MongoDB.Bson.Serialization.BsonDeserializationArgs());
+        reader.ReadEndDocument();
+
+        Assert.Equal("value", name);
         Assert.Equal(userId, deserializedUserId);
         Assert.Equal(originalId, deserializedUserId.Value);
     }
