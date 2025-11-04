@@ -3,7 +3,7 @@
 internal sealed record VoCandidate(
     string TypeName,
     string? Namespace,
-    string TvDisplay
+    string TvDisplay,
+    bool IsRecordStruct,
+    bool IsReadOnly
 );
-
-

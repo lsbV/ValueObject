@@ -40,7 +40,7 @@ internal static class TvAsEmitter
             // use primary ctor and call the base‑class primary ctor:
             sb.AppendLine($"public readonly record struct {className} : IAs<{genericArg}>");
             sb.AppendLine("{");
-            sb.AppendLine($"    public {tvSimple} Value {{ get; }}");
+            sb.AppendLine($"    public {ctorParam} Value {{ get; }}");
             sb.AppendLine($"    public {className}({ctorParam} value) : this() => Value = value;");
             // one property-per‐VO
             foreach (var vo in grp)

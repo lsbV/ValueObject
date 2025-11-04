@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.CSharp;
 using ValueObject.SourceGenerator.Models;
 
 namespace ValueObject.SourceGenerator.Providers;
@@ -29,10 +30,13 @@ internal static class VoDeclarationProvider
                     var tValue = impl.TypeArguments[0];
                     var tvString = tValue.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
                     var ns = sym.ContainingNamespace.IsGlobalNamespace
-                                   ? null
+                                   ? (string?)null
                                    : sym.ContainingNamespace.ToString();
 
-                    return new VoCandidate(sym.Name, ns, tvString);
+                    var isRecordStruct = decl.ClassOrStructKeyword.IsKind(SyntaxKind.StructKeyword);
+                    var isReadOnly = decl.Modifiers.Any(m => m.IsKind(SyntaxKind.ReadOnlyKeyword));
+
+                    return new VoCandidate(sym.Name, ns, tvString, isRecordStruct, isReadOnly);
                 }
             )
             .Where(x => x is not null)!;  // filter out non‑VOs
