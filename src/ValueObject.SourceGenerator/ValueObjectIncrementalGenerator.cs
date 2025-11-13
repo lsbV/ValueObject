@@ -8,6 +8,12 @@ public class ValueObjectIncrementalGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext ctx)
     {
+//#if DEBUG
+//        if (!System.Diagnostics.Debugger.IsAttached)
+//        {
+//            System.Diagnostics.Debugger.Launch();
+//        }
+//#endif
         //1) find all VO records
         var vosProvider = VoDeclarationProvider.Setup(ctx).Collect();
 

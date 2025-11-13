@@ -1,8 +1,4 @@
-﻿using ValueObject.SourceGenerator.Emitters;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.CodeAnalysis;
-using ValueObject.SourceGenerator.Models;
+﻿using ValueObject.SourceGenerator.Models;
 
 namespace ValueObject.SourceGenerator.Providers;
 
@@ -19,8 +15,8 @@ internal static class EntityValueObjectProvider
             var classDecls = root.DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.ClassDeclarationSyntax>();
             foreach (var classDecl in classDecls)
             {
-                var classSymbol = semanticModel.GetDeclaredSymbol(classDecl) as INamedTypeSymbol;
-                if (classSymbol == null) continue;
+                if (semanticModel.GetDeclaredSymbol(classDecl) is not INamedTypeSymbol classSymbol) continue;
+                
                 var entityName = classSymbol.Name;
                 var entityNamespace = classSymbol.ContainingNamespace.IsGlobalNamespace ? null : classSymbol.ContainingNamespace.ToString();
                 var properties = classSymbol.GetMembers().OfType<IPropertySymbol>();

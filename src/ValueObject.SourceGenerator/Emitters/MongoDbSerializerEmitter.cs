@@ -48,7 +48,7 @@ internal static class MongoDbSerializerEmitter
         }
     }
 
-    private static bool IsSupportedUnderlying(string tv)
+    public static bool IsSupportedUnderlying(string tv)
     => tv switch
     {
         "global::MongoDB.Bson.ObjectId" => true,
@@ -61,6 +61,16 @@ internal static class MongoDbSerializerEmitter
         "global::System.Guid" => true,
         "global::System.Byte[]" => true,
         "global::System.DateTime" => true,
+
+        "string" => true,
+        "int" => true,
+        "long" => true,
+        "double" => true,
+        "decimal" => true,
+        "bool" => true,
+        "System.Guid" => true,
+        "byte[]" => true,
+        "System.DateTime" => true,
         _ => false
     };
 
@@ -71,31 +81,31 @@ internal static class MongoDbSerializerEmitter
             case "global::MongoDB.Bson.ObjectId":
                 sb.AppendLine("        context.Writer.WriteObjectId(value.Value);");
                 break;
-            case "global::System.String":
+            case "global::System.String" or "string":
                 sb.AppendLine("        context.Writer.WriteString(value.Value);");
                 break;
-            case "global::System.Int32":
+            case "global::System.Int32" or "int":
                 sb.AppendLine("        context.Writer.WriteInt32(value.Value);");
                 break;
-            case "global::System.Int64":
+            case "global::System.Int64" or "long":
                 sb.AppendLine("        context.Writer.WriteInt64(value.Value);");
                 break;
-            case "global::System.Double":
+            case "global::System.Double" or "double":
                 sb.AppendLine("        context.Writer.WriteDouble(value.Value);");
                 break;
-            case "global::System.Decimal":
+            case "global::System.Decimal" or "decimal":
                 sb.AppendLine("        context.Writer.WriteDecimal128(new Decimal128(value.Value));");
                 break;
-            case "global::System.Boolean":
+            case "global::System.Boolean" or "bool":
                 sb.AppendLine("        context.Writer.WriteBoolean(value.Value);");
                 break;
-            case "global::System.Guid":
+            case "global::System.Guid" or "Guid":
                 sb.AppendLine("        context.Writer.WriteString(value.Value.ToString());");
                 break;
-            case "global::System.Byte[]":
+            case "global::System.Byte[]" or "byte[]":
                 sb.AppendLine("        context.Writer.WriteBytes(value.Value);");
                 break;
-            case "global::System.DateTime":
+            case "global::System.DateTime" or "DateTime":
                 sb.AppendLine("        var ms = BsonUtils.ToMillisecondsSinceEpoch(value.Value.ToUniversalTime());");
                 sb.AppendLine("        context.Writer.WriteDateTime(ms);");
                 break;
@@ -114,41 +124,41 @@ internal static class MongoDbSerializerEmitter
                 sb.AppendLine("        var oid = context.Reader.ReadObjectId();");
                 sb.AppendLine($"        return new {vo.TypeName}(oid);");
                 break;
-            case "global::System.String":
+            case "global::System.String" or "string":
                 sb.AppendLine("        var s = context.Reader.ReadString();");
                 sb.AppendLine($"        return new {vo.TypeName}(s);");
                 break;
-            case "global::System.Int32":
+            case "global::System.Int32" or "int":
                 sb.AppendLine("        var i = context.Reader.ReadInt32();");
                 sb.AppendLine($"        return new {vo.TypeName}(i);");
                 break;
-            case "global::System.Int64":
+            case "global::System.Int64" or "long":
                 sb.AppendLine("        var l = context.Reader.ReadInt64();");
                 sb.AppendLine($"        return new {vo.TypeName}(l);");
                 break;
-            case "global::System.Double":
+            case "global::System.Double" or "double":
                 sb.AppendLine("        var d = context.Reader.ReadDouble();");
                 sb.AppendLine($"        return new {vo.TypeName}(d);");
                 break;
-            case "global::System.Decimal":
+            case "global::System.Decimal" or "decimal":
                 sb.AppendLine("        var d128 = context.Reader.ReadDecimal128();");
                 sb.AppendLine("        var dec = d128.ToDecimal();");
                 sb.AppendLine($"        return new {vo.TypeName}(dec);");
                 break;
-            case "global::System.Boolean":
+            case "global::System.Boolean" or "bool":
                 sb.AppendLine("        var b = context.Reader.ReadBoolean();");
                 sb.AppendLine($"        return new {vo.TypeName}(b);");
                 break;
-            case "global::System.Guid":
+            case "global::System.Guid" or "Guid":
                 sb.AppendLine("        var gs = context.Reader.ReadString();");
                 sb.AppendLine("        var g = global::System.Guid.Parse(gs);");
                 sb.AppendLine($"        return new {vo.TypeName}(g);");
                 break;
-            case "global::System.Byte[]":
+            case "global::System.Byte[]" or "byte[]":
                 sb.AppendLine("        var bytes = context.Reader.ReadBytes();");
                 sb.AppendLine($"        return new {vo.TypeName}(bytes);");
                 break;
-            case "global::System.DateTime":
+            case "global::System.DateTime" or "DateTime":
                 sb.AppendLine("        var ms = context.Reader.ReadDateTime();");
                 sb.AppendLine("        var dt = BsonUtils.ToDateTimeFromMillisecondsSinceEpoch(ms);");
                 sb.AppendLine($"        return new {vo.TypeName}(dt);");
