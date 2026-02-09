@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/examples/">
+    <Project Path="examples/AppHost/AppHost.csproj" />
+    <Project Path="examples/AspConfig/AspConfig.csproj" />
+    <Project Path="examples/EfCoreExample/EfCoreExample.csproj" />
+    <Project Path="examples/MongoDbExample/MongoDbExample.csproj" />
+    <Project Path="examples/ServiceDefaults/ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/ValueObject.Core/ValueObject.Core.csproj" />
+    <Project Path="src/ValueObject.SourceGenerator/ValueObject.SourceGenerator.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ValueObjectTests/ValueObjectTests.csproj" />
+  </Folder>
+</Solution>
