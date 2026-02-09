@@ -1,0 +1,29 @@
+@MongoDbExample_HostAddress = http://localhost:5257
+
+### Create a new product
+POST {{MongoDbExample_HostAddress}}/products
+Content-Type: application/json
+
+{
+  "name": "MongoDB Book",
+  "price": 49.99
+}
+
+> {% 
+  client.global.set("productId", response.body.id);
+%}
+
+###
+
+### Get product by ID (using ID from POST response)
+GET {{MongoDbExample_HostAddress}}/products/{{productId}}
+Accept: application/json
+
+###
+
+### Get all products
+GET {{MongoDbExample_HostAddress}}/products
+Accept: application/json
+
+###
+

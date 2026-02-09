@@ -1,0 +1,25 @@
+@EfCoreExample_HostAddress = http://localhost:5183
+
+### Get all products
+GET {{EfCoreExample_HostAddress}}/products
+Accept: application/json
+
+###
+
+### Get product by ID
+GET {{EfCoreExample_HostAddress}}/products/550e8400-e29b-41d4-a716-446655440000
+Accept: application/json
+
+###
+
+### Create a new product
+POST {{EfCoreExample_HostAddress}}/products
+Content-Type: application/json
+
+{
+  "name": "Laptop",
+  "price": 999.99
+}
+
+###
+
