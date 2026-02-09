@@ -142,7 +142,7 @@ internal static class MongoDbSerializerEmitter
                 break;
             case "global::System.Decimal" or "decimal":
                 sb.AppendLine("        var d128 = context.Reader.ReadDecimal128();");
-                sb.AppendLine("        var dec = d128.ToDecimal();");
+                sb.AppendLine("        var dec = Decimal128.ToDecimal(d128);");
                 sb.AppendLine($"        return new {vo.TypeName}(dec);");
                 break;
             case "global::System.Boolean" or "bool":

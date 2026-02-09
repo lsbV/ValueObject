@@ -7,7 +7,7 @@ public class OperatorsTests
     private const string NAME = "Victor Shnaider";
 
     [Fact]
-    public void ImplisitOperator_Should_Convert_ValueObject_To_Primiry_Type()
+    public void ImplisitOperator_Should_Convert_ValueObject_To_Primary_Type()
     {
         var name = new Name(NAME);
 
@@ -17,7 +17,7 @@ public class OperatorsTests
     }
 
     [Fact]
-    public void ExplicitOperator_Should_Convert_Primiry_Type_To_ValueObject()
+    public void ExplicitOperator_Should_Convert_Primary_Type_To_ValueObject()
     {
         string value = NAME;
 
@@ -39,7 +39,7 @@ public class OperatorsTests
     }
 
     [Fact]
-    public void AsExtension_Should_Convert_Primiry_Type_To_AsWrapper()
+    public void AsExtension_Should_Convert_Primary_Type_To_AsWrapper()
     {
         string value = NAME;
 

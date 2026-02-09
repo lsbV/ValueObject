@@ -5,7 +5,7 @@ namespace ValueObjectTests;
 public class ConverterTests
 {
     [Fact]
-    public void ValueConverter_Should_Convert_ValueObject_To_Primiry_Type()
+    public void ValueConverter_Should_Convert_ValueObject_To_Primary_Type()
     {
         var age = new Age(30);
         var converter = new AgeValueConverter();
@@ -14,7 +14,7 @@ public class ConverterTests
     }
 
     [Fact]
-    public void ValueConverter_Should_Convert_Primiry_Type_To_ValueObject()
+    public void ValueConverter_Should_Convert_Primary_Type_To_ValueObject()
     {
         int value = 30;
         var converter = new AgeValueConverter();
