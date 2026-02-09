@@ -2,5 +2,5 @@
 
 public interface IAs<T>
 {
-    protected abstract T Value { get; }
+    abstract T Value { get; }
 }

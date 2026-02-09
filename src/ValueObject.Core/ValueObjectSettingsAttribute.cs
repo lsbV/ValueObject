@@ -1,4 +1,6 @@
-﻿namespace ValueObject.Core;
+﻿using System;
+
+namespace ValueObject.Core;
 
 [AttributeUsage(AttributeTargets.Assembly)]
 public class ValueObjectSettingsAttribute : Attribute

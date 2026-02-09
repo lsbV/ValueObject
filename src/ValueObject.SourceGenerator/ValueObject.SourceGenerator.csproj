@@ -1,18 +1,52 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
-		<LangVersion>14</LangVersion>
-		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<OutputItemType>Analyzer</OutputItemType>
-		<IsRoslynComponent>true</IsRoslynComponent>
-		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-	</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>14</LangVersion>
+    <Nullable>enable</Nullable>
+    <OutputItemType>Analyzer</OutputItemType>
+    <IsRoslynComponent>true</IsRoslynComponent>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    
+    <!-- Package Information -->
+    <PackageId>lsbV.ValueObject</PackageId>
+    <Version>1.0.3</Version>
+    <Authors>lsbV</Authors>
+    <Company>lsbV</Company>
+    <Description>A powerful C# source generator that automates utility methods for value objects. Generates TryParse methods, operators, type conversions, Entity Framework Core converters, and MongoDB serializers.</Description>
+    <PackageTags>source-generator;value-object;ddd;domain-driven-design;roslyn;analyzer;efcore;mongodb;minimal-api</PackageTags>
+    <PackageProjectUrl>https://github.com/lsbV/ValueObject</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/lsbV/ValueObject</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <Copyright>Copyright (c) 2026</Copyright>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <NoWarn>$(NoWarn);NU5128;NU5017</NoWarn>
+  </PropertyGroup>
 
-	<ItemGroup>
-	  <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" PrivateAssets="all" />
+  </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ValueObject.Core\ValueObject.Core.csproj" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\icon.png" Pack="true" PackagePath="\" Condition="Exists('..\..\icon.png')" />
+  </ItemGroup>
+
+  <!-- Pack the generator as an analyzer -->
+  <ItemGroup>
+    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None Include="$(OutputPath)\ValueObject.Core.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None Include="$(OutputPath)\ValueObject.Core.dll" Pack="true" PackagePath="lib\netstandard2.0" Visible="false" />
+  </ItemGroup>
 
 </Project>
