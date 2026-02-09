@@ -32,6 +32,7 @@ public class ValueObjectIncrementalGenerator : IIncrementalGenerator
                 OperatorsEmitter.Emit(spc, voArray);
                 TvAsEmitter.Emit(spc, voArray);
                 ExtensionBlockEmitter.Emit(spc, voArray);
+                TryParseEmitter.Emit(spc, voArray);
 
                 // Conditionally emit EF Core value converters and model builder helpers
                 if (genEfCore)
