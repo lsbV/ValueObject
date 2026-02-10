@@ -4,12 +4,12 @@ namespace ValueObjectTests;
 
 public class OperatorsTests
 {
-    private const string NAME = "Victor Shnaider";
+    private const string Name = "Victor Shnaider";
 
     [Fact]
-    public void ImplisitOperator_Should_Convert_ValueObject_To_Primary_Type()
+    public void ImplicitOperator_Should_Convert_ValueObject_To_Primary_Type()
     {
-        var name = new Name(NAME);
+        var name = new Name(Name);
 
         string value = name;
 
@@ -19,7 +19,7 @@ public class OperatorsTests
     [Fact]
     public void ExplicitOperator_Should_Convert_Primary_Type_To_ValueObject()
     {
-        string value = NAME;
+        string value = Name;
 
         Name name = (Name)value;
 
@@ -41,7 +41,7 @@ public class OperatorsTests
     [Fact]
     public void AsExtension_Should_Convert_Primary_Type_To_AsWrapper()
     {
-        string value = NAME;
+        string value = Name;
 
         var valueObject = value.As.Name;
 

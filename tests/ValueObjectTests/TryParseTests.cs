@@ -1,5 +1,5 @@
+using System.Globalization;
 using MongoDB.Bson;
-using ValueObject.Core;
 
 namespace ValueObjectTests;
 
@@ -168,6 +168,8 @@ public class TryParseTests
     [Fact]
     public void Price_TryParse_Should_Parse_Valid_Decimal()
     {
+        decimal.TryParse("19.99", NumberStyles.Any, NumberFormatInfo.InvariantInfo, out var expected);
+        Assert.Equal(19.99m, expected);
         const string testValue = "19.99";
         var result = Price.TryParse(testValue, out var price);
         
@@ -377,12 +379,11 @@ public class TryParseTests
     [Fact]
     public void ProductId_TryParse_Should_Set_Out_Parameter_On_Success()
     {
-        ProductId? productId = null;
         var testGuid = Guid.NewGuid();
-        var result = ProductId.TryParse(testGuid.ToString(), out productId);
+        var result = ProductId.TryParse(testGuid.ToString(), out var productId);
         
         Assert.True(result);
-        Assert.NotNull(productId);
+        Assert.NotEqual(productId, Guid.Empty);
         Assert.Equal(testGuid, productId.Value);
     }
 
