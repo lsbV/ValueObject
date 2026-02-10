@@ -418,7 +418,7 @@ public class TryParseTests
     {
         const double testValue = 42.5;
         var length1 = new Length(testValue);
-        var stringValue = length1.Value.ToString();
+        var stringValue = length1.ToString();
         var parseResult = Length.TryParse(stringValue, out var length2);
         
         Assert.True(parseResult);

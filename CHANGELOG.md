@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.4] - 2026-02-10
+
+### Fixed
+- EF Core model builder emitter now generates one file-scoped namespace and a single extensions class per namespace to avoid duplicate declarations.
+- TryParse generation now defaults to invariant culture when provider is null and normalizes decimal separators for floating-point inputs.
+- TryParse roundtrip test now formats doubles using invariant culture to match parsing behavior.
+
 ### Added
 - Initial documentation suite
 - Complete user and contributor guides

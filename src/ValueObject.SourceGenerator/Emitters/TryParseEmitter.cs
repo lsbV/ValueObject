@@ -36,6 +36,11 @@ internal static class TryParseEmitter
             sb.AppendLine("        result = default!; // assign default to out parameter");
             sb.AppendLine("        if (string.IsNullOrEmpty(value))");
             sb.AppendLine("            return false;");
+            sb.AppendLine("        provider ??= System.Globalization.CultureInfo.InvariantCulture;");
+            if (IsFloatingType(tvDisplay))
+            {
+                sb.AppendLine("        value = value.Replace(',', '.');");
+            }
             sb.AppendLine();
             
             if (isString)
@@ -107,5 +112,10 @@ internal static class TryParseEmitter
             _ => false
         };
     }
-}
 
+    private static bool IsFloatingType(string typeDisplay)
+    {
+        var cleanType = typeDisplay.Replace("global::", "").Replace("System.", "");
+        return cleanType is "float" or "double" or "decimal";
+    }
+}
