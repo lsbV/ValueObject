@@ -22,7 +22,7 @@ This guide walks you through the fundamentals of using the ValueObject source ge
 ### Install the Package
 
 ```bash
-dotnet add package ValueObject
+dotnet add package lsbV.ValueObject
 ```
 
 Or manually add to your `.csproj`:
