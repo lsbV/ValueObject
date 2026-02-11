@@ -48,9 +48,20 @@ public class OperatorsTests
         Assert.Equal(value, valueObject);
     }
 
+    [Fact]
+    public void Nullable_And_Not_Nullable_Should_Work()
+    {
+        Country? name1 = null;
+        Country name2 = new Country("Ukraine");
+        Assert.True(name1 != name2);
+    }
+
 }
 
 
 public partial record Name(string Value) : IValueObject<string>;
 
 public partial record Length(double Value) : IValueObject<double>;
+
+public readonly partial record struct Country(string Value) : IValueObject<string>;
+

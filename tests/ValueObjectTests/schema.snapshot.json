@@ -1,0 +1,111 @@
+﻿{
+  "Entities": [
+    {
+      "Table": "Orders",
+      "Schema": null,
+      "ClrType": "ValueObjectTests.Order",
+      "Columns": [
+        {
+          "Column": "Id",
+          "Type": "ValueObjectTests.OrderId",
+          "Nullable": false,
+          "MaxLength": null,
+          "Precision": null,
+          "Scale": null,
+          "Unicode": null
+        },
+        {
+          "Column": "Price",
+          "Type": "ValueObjectTests.Price",
+          "Nullable": false,
+          "MaxLength": null,
+          "Precision": null,
+          "Scale": null,
+          "Unicode": null
+        },
+        {
+          "Column": "ProductId",
+          "Type": "ValueObjectTests.ProductId",
+          "Nullable": false,
+          "MaxLength": null,
+          "Precision": null,
+          "Scale": null,
+          "Unicode": null
+        },
+        {
+          "Column": "Quantity",
+          "Type": "ValueObjectTests.Quantity",
+          "Nullable": false,
+          "MaxLength": null,
+          "Precision": null,
+          "Scale": null,
+          "Unicode": null
+        }
+      ],
+      "PrimaryKey": [
+        "Id"
+      ],
+      "Indexes": [
+        {
+          "Name": "IX_Orders_ProductId",
+          "Unique": false,
+          "Columns": [
+            "ProductId"
+          ]
+        }
+      ],
+      "ForeignKeys": [
+        {
+          "Name": "FK_Orders_Products_ProductId",
+          "Columns": [
+            "ProductId"
+          ],
+          "PrincipalTable": "Products",
+          "PrincipalColumns": [
+            "Id"
+          ],
+          "DeleteBehavior": "Cascade"
+        }
+      ]
+    },
+    {
+      "Table": "Products",
+      "Schema": null,
+      "ClrType": "ValueObjectTests.Product",
+      "Columns": [
+        {
+          "Column": "Id",
+          "Type": "ValueObjectTests.ProductId",
+          "Nullable": false,
+          "MaxLength": null,
+          "Precision": null,
+          "Scale": null,
+          "Unicode": null
+        },
+        {
+          "Column": "ImageUrl",
+          "Type": "System.Nullable`1[[ValueObjectTests.ImageUrl, ValueObjectTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+          "Nullable": true,
+          "MaxLength": 128,
+          "Precision": null,
+          "Scale": null,
+          "Unicode": null
+        },
+        {
+          "Column": "Price",
+          "Type": "ValueObjectTests.Price",
+          "Nullable": false,
+          "MaxLength": null,
+          "Precision": null,
+          "Scale": null,
+          "Unicode": null
+        }
+      ],
+      "PrimaryKey": [
+        "Id"
+      ],
+      "Indexes": [],
+      "ForeignKeys": []
+    }
+  ]
+}

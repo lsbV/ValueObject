@@ -1,0 +1,34 @@
+﻿{
+  "Collections": [
+    {
+      "Collection": "Products",
+      "Fields": [
+        {
+          "Field": "_id",
+          "BsonType": "ObjectId"
+        },
+        {
+          "Field": "CreatedAt",
+          "BsonType": "DateTime"
+        },
+        {
+          "Field": "Name",
+          "BsonType": "String"
+        },
+        {
+          "Field": "Orders",
+          "BsonType": "Array"
+        },
+        {
+          "Field": "Price",
+          "BsonType": "Decimal128"
+        },
+        {
+          "Field": "Sku",
+          "BsonType": "String"
+        }
+      ]
+    }
+  ]
+}
+

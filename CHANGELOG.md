@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.5] - 2026-02-11
+
+### Fixed
+- Added nullable comparison operators for value object structs to resolve ambiguous operator invocation errors when comparing nullable and non-nullable value objects.
+
+### Added
+- MongoDB integration tests with class fixture pattern using Testcontainers
+  - Comprehensive CRUD operation tests with value objects
+  - Query filtering tests by value object properties
+  - Schema snapshot testing for MongoDB collections
+  - Fixture-based container management for efficient test execution
+
 ## [1.0.4] - 2026-02-10
 
 ### Fixed

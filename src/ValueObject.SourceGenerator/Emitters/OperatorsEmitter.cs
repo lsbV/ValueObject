@@ -31,6 +31,15 @@ internal static class OperatorsEmitter
             // For the reversed comparison we still place {vo.TypeName} on the left.
             sb.AppendLine($"    public static bool operator ==({vo.TvDisplay} left, {vo.TypeName} right) => left == right.Value;");
             sb.AppendLine($"    public static bool operator !=({vo.TvDisplay} left, {vo.TypeName} right) => left != right.Value;");
+            
+            // Nullable operators for structs to avoid ambiguity
+            if (vo.IsRecordStruct)
+            {
+                sb.AppendLine($"    public static bool operator ==({vo.TypeName}? left, {vo.TypeName} right) => left.HasValue && left.Value == right;");
+                sb.AppendLine($"    public static bool operator !=({vo.TypeName}? left, {vo.TypeName} right) => !left.HasValue || left.Value != right;");
+                sb.AppendLine($"    public static bool operator ==({vo.TypeName} left, {vo.TypeName}? right) => right.HasValue && left == right.Value;");
+                sb.AppendLine($"    public static bool operator !=({vo.TypeName} left, {vo.TypeName}? right) => !right.HasValue || left != right.Value;");
+            }
             // <, >, <=, >= operators for certain types
             if (TypesWithGreaterLessOperators.Contains(vo.TvDisplay))
             {
